@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Лад — тихое место для дел и мыслей</title>
+    <meta
+      name="description"
+      content="Лад — персональное пространство: задачи, заметки, календарь, привычки и фокус-таймер. Все данные остаются только у вас."
+    />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <script>
+      // Ранняя установка темы до первой отрисовки, чтобы не было «вспышки»
+      try {
+        var s = (JSON.parse(localStorage.getItem('lad.v1') || '{}').settings) || {};
+        var t = s.theme || 'auto';
+        if (t === 'auto') {
+          t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.dataset.theme = t;
+        document.documentElement.dataset.accent = s.accent || 'terracotta';
+      } catch (e) {
+        document.documentElement.dataset.theme = 'light';
+        document.documentElement.dataset.accent = 'terracotta';
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
